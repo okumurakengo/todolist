@@ -11,7 +11,7 @@ class DB {
         $this->pdo->exec(
             "CREATE TABLE IF NOT EXISTS todolist(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                category_id INTEGER
+                category_id INTEGER,
                 todo VARCHAR(300),
                 createdate DATETIME,
                 modifieddate DATETIME
