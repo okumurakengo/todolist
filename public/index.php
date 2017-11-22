@@ -23,15 +23,8 @@ $container['view'] = function ($container) {
     return $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 };
 
-$container['pdo'] = function ($c) {
-    $pdo = new PDO('sqlite:../db/db.sqlite');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $pdo;
-};
-
 $app->get('/', function (Request $request, Response $response) {
-    $db = new DB($this->pdo);
+    $db = new DB();
     $db->createtodo();
     return $response->withStatus(302)->withHeader('Location', '/todos');
 });
