@@ -14,13 +14,14 @@ $app = new \Slim\App(["settings" => $config]);
 $container = $app->getContainer();
 
 $container['view'] = function ($container) {
-    $view = new \Slim\Views\Twig('templates', [
-        'cache' => 'cache',
+    $view = new \Slim\Views\Twig(__DIR__.'/../templates', [
+        'cache' => __DIR__.'/../cache',
         'debug' => true
     ]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-    return $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+    $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+    return $view;
 };
 
 $app->get('/', function (Request $request, Response $response) {
@@ -30,5 +31,6 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 require_once __DIR__ . '/todos.php';
+require_once __DIR__ . '/category.php';
 
 $app->run();

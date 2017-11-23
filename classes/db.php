@@ -4,7 +4,7 @@ class DB {
     protected $pdo;
 
     public function __construct() {
-        $pdo = new PDO('sqlite:../db/db.sqlite');
+        $pdo = new PDO('sqlite:'.__DIR__.'/../db/db.sqlite');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->pdo = $pdo;
@@ -31,21 +31,17 @@ class DB {
         $this->pdo->exec(
             "INSERT INTO category(
                 title,
-                createdate,
-                modifieddate
+                createdate
              )
-             SELECT title,createdate,modifieddate FROM (
+             SELECT title,createdate FROM (
                 SELECT 'MyWork'                    title,
-                       DATETIME('now','localtime') createdate,
-                       DATETIME('now','localtime') modifieddate
+                       DATETIME('now','localtime') createdate
                 UNION ALL
                 SELECT 'Todos'                     title,
-                       DATETIME('now','localtime') createdate,
-                       DATETIME('now','localtime') modifieddate
-                UNION ALL
+                       DATETIME('now','localtime') createdate
+                       UNION ALL
                 SELECT 'Shopping'                  title,
-                       DATETIME('now','localtime') createdate,
-                       DATETIME('now','localtime') modifieddate
+                       DATETIME('now','localtime') createdate
              )
              JOIN
              (SELECT COUNT(*) count FROM category)
