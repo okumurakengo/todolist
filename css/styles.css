@@ -25,17 +25,19 @@ table thead {
     color: #fff;
 }
 
+table thead tr {
+    text-align: left;
+    padding: 5px;
+}
+
 table tbody tr {
     border-bottom: 1px solid #aaa;
-}
-
-table tr td:first-child {
-    padding: 5px 30px;
-}
-
-table tr td {
     padding: 5px;
-    text-align: center;
+}
+
+table tr td:first-child,
+table tr th:first-child{
+    padding: 5px 30px;
 }
 
 .btn_new{
@@ -54,15 +56,19 @@ table tr td {
 }
 
 .flex span:first-child {
-    flex-basis: 170px;
+    flex-basis: 150px;
 }
 
 .flex span:last-child {
-    flex-basis: 300px;
+    flex-basis: 500px;
 }
 
 input[type="text"]{
     font-size: 15px;
     padding: 5px;
     width: 100%;
+}
+
+.complete{
+    text-decoration: line-through;
 }

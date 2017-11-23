@@ -13,10 +13,10 @@
                 return;
             }
 
-            form.setAttribute("action",`/category/del/${del.dataset.id}`);
+            form.setAttribute("action",`/todo/del/${del.dataset.id}`);
             form.submit();
         },false);
 
     },false);
-        
+
 })();

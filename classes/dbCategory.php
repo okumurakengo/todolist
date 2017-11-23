@@ -28,7 +28,7 @@ class dbCategory extends DB {
     // setter
     public function setTitle(string $title){
         $this->title = $title;
-}
+    }
 
     // 共通
     private function saveCategory(array $data){

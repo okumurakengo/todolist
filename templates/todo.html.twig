@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}todo{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <script src="./js/todo.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="new_link">
+    <a class="btn_new siimple-btn siimple-btn--teal" href="/todo/add">新規登録</a>
+</div>
+<form method="post" action="/todo/update/{id}">
+    <table>
+        <caption>Todo一覧</caption>
+        <colgroup>
+            <col width="200">
+            <col width="550">
+            <col width="100">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>カテゴリー</th>
+                <th>内容</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for key,row in todoList %}
+            <tr class="siimple-bg-blue">
+                <td>{{ row.category_title }}</td>
+                <td>
+                    <label>
+                        <input type="checkbox" class="check" value="1"
+                            data-id="{{ row.id }}"
+                            {% if row.check_flg %}checked{% endif %}>
+                        <span{% if row.check_flg %} class="complete"{% endif %}>{{ row.content }}</span>
+                    </label>
+                </td>
+                <td>
+                    <a class="siimple-btn siimple-btn--blue" href="/todo/edit/{{ row.id }}">変更</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</form>
+{% endblock %}

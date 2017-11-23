@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block title %}todo{% endblock %}
+{% block head %}
+    {{ parent() }}
+    {% if todoData %}
+    <script src="./js/todoform.js"></script>
+    {% endif %}
+{% endblock %}
+
+{% block header1 %}カテゴリー {% if todoData %}{{ todoData.title }}{% else %}追加{% endif %}{% endblock %}
+
+{% block content %}
+<form method="post" action="{% if todoData %}/todo/edit/{{ todoData.id }}{% else %}/todo/add{% endif %}">
+    {% if todoData %}
+    <div class="flex">
+        <span>ID</span>
+        <span>{{ todoData.id }}</span>
+    </div>
+    {% endif %}
+    <div class="flex">
+        <span>
+            <label for="category_id">カテゴリー</label>
+        </span>
+        <span>
+            <select name="category_id">
+            {% for key,row in categoryList %}
+                <option value="{{ row.id }}">{{ row.title }}</option>
+            {% endfor %}
+            </select>
+        </span>
+    </div>
+    <div class="flex">
+        <span>
+            <label for="content">内容</label>
+        </span>
+        <span>
+            <input type="text" id="content" name="content" 
+                   {% if todoData %}value="{{ todoData.content }}"{% endif %} required>
+        </span>
+    </div>
+    <div class="flex">
+        <span>
+            <label for="check_flg">完了</label>
+        </span>
+        <span>
+            <input type="checkbox" id="check_flg" name="check_flg" value="1" {% if todoData.check_flg %}checked{% endif %}>
+        </span>
+    </div>
+    {% if todoData %}
+    <div class="flex">
+        <span>作成日</span>
+        <span>{{ todoData.createdate }}</span>
+    </div>
+    <div class="flex">
+        <span>更新日</span>
+        <span>{{ todoData.modifieddate }}</span>
+    </div>
+    {% endif %}
+    <input type="submit" class="siimple-btn siimple-btn--blue" value="{% if todoData %}更新{% else %}追加{% endif %}">
+    {% if todoData %}
+    <input type="submit" id="del" class="siimple-btn siimple-btn--orange" data-id="{{ todoData.id }}" value="削除">
+    {% endif %}
+</form>
+{% endblock %}

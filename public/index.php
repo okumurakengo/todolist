@@ -27,10 +27,10 @@ $container['view'] = function ($container) {
 $app->get('/', function (Request $request, Response $response) {
     $db = new DB();
     $db->createtodo();
-    return $response->withStatus(302)->withHeader('Location', '/todos');
+    return $response->withStatus(302)->withHeader('Location', '/todo');
 });
 
-require_once __DIR__ . '/todos.php';
+require_once __DIR__ . '/todo.php';
 require_once __DIR__ . '/category.php';
 
 $app->run();

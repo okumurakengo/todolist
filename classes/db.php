@@ -12,10 +12,11 @@ class DB {
 
     public function createtodo(){
         $this->pdo->exec(
-            "CREATE TABLE IF NOT EXISTS todolist(
+            "CREATE TABLE IF NOT EXISTS todo(
                 id           INTEGER PRIMARY KEY AUTOINCREMENT,
                 category_id  INTEGER,
-                todo         VARCHAR(300),
+                content      VARCHAR(300),
+                check_flg    INTEGER,
                 createdate   DATETIME,
                 modifieddate DATETIME
             )"

@@ -50,6 +50,15 @@ $app->post('/category/edit/{id}', function (Request $request, Response $response
 
 $app->post('/category/del/{id}', function (Request $request, Response $response, $args) {
     $dbCategory = new dbCategory;
-    $dbCategory->delCategory($args['id']);
-    return $response->withStatus(302)->withHeader('Location', '/category');
+    $dbTodo = new dbTodo;
+
+    if($dbTodo->cntTodo()){
+        return "<html><body>
+                    <script>alert('todoにデータがある場合は削除できません。');
+                            location.href='/category';</script>
+                </body></html>";
+    }else{
+        $dbCategory->delCategory($args['id']);
+        return $response->withStatus(302)->withHeader('Location', '/category');
+    }
 });
