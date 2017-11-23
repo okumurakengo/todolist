@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body,
+header{
+    margin:0;
+    padding:0;
+}
+
+header {
+    background: #ffebbc;
+    padding: 10px;
+}
+
+.main{
+    margin: 10px auto;
+    width: 850px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table thead {
+    background: #32e7ad;
+    color: #fff;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #aaa;
+}
+
+table tr td:first-child {
+    padding: 5px 30px;
+}
+
+table tr td {
+    padding: 5px;
+    text-align: center;
+}
+
+.btn_new{
+    float: right;
+}
+
+.new_link:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.flex {
+    display: flex;
+    margin: 0 0 10px 0;
+}
+
+.flex span:first-child {
+    flex-basis: 170px;
+}
+
+.flex span:last-child {
+    flex-basis: 300px;
+}
+
+input[type="text"]{
+    font-size: 15px;
+    padding: 5px;
+    width: 100%;
+}

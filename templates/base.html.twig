@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% block head %}
+  <meta character="utf-8">
+  <title>{% block title %}{% endblock %} - Todoリスト</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/siimple/2.0.1/siimple.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  {% endblock %}
+</head>
+<body>
+<header>
+    <a href="/todos" class="siimple-btn siimple-btn--yellow">todos</a>
+    <a href="/category" class="siimple-btn siimple-btn--yellow">category</a>
+</header>
+
+<div id="content">
+    <div class="main">
+        <h1>{% block header1 %}Todoリスト{% endblock %}</h1>
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

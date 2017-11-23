@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}category{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="new_link">
+    <a class="btn_new siimple-btn siimple-btn--teal" href="/category/add">新規登録</a>
+</div>
+<table>
+    <caption>カテゴリー一覧</caption>
+    <colgroup>
+        <col width="200">
+        <col width="250">
+        <col width="250">
+        <col width="150">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>カテゴリー</th>
+            <th>作成日</th>
+            <th>変更日</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for key,row in categoryList %}
+        <tr class="siimple-bg-blue">
+            <td>{{ row.title }}</td>
+            <td>{{ row.createdate }}</td>
+            <td>{{ row.modifieddate }}</td>
+            <td>
+                <a class="siimple-btn siimple-btn--blue" href="/category/edit/{{ row.id }}">変更</a>
+            </td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

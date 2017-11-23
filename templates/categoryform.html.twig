@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}category add{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <script src="./js/scripts.js"></script>
+{% endblock %}
+
+{% block header1 %}カテゴリー {% if categoryData %}{{ categoryData.title }}{% else %}追加{% endif %}{% endblock %}
+
+{% block content %}
+<form method="post" action="{% if categoryData %}/category/edit/{{ categoryData.id }}{% else %}/category/add{% endif %}">
+    {% if categoryData %}
+    <div class="flex">
+        <span>ID</span>
+        <span>{{ categoryData.id }}</span>
+    </div>
+    {% endif %}
+    <div class="flex">
+        <span>
+            <label for="title">カテゴリー名</label>
+        </span>
+        <span>
+            <input type="text" id="title" name="title" 
+                   {% if categoryData %}value="{{ categoryData.title }}"{% endif %}
+                   placeholder="例：Todos" required>
+        </span>
+    </div>
+    {% if categoryData %}
+    <div class="flex">
+        <span>作成日</span>
+        <span>{{ categoryData.createdate }}</span>
+    </div>
+    <div class="flex">
+        <span>更新日</span>
+        <span>{{ categoryData.modifieddate }}</span>
+    </div>
+    {% endif %}
+    <input type="submit" class="siimple-btn siimple-btn--blue" value="{% if categoryData %}更新{% else %}追加{% endif %}">
+    {% if categoryData %}
+    <input type="submit" id="del" class="siimple-btn siimple-btn--orange" data-id="{{ categoryData.id }}" value="削除">
+    {% endif %}
+</form>
+{% endblock %}

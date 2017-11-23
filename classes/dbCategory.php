@@ -17,24 +17,24 @@ class dbCategory extends DB {
         return $this->title;
     }
 
-    public function getCreatedate(){
-        return $this->createdate;
+    public function getCreatedate(string $format = 'Y年m月d日 H:i'){
+        return (new DateTime($this->createdate))->format($format);
     }
 
-    public function getModifieddate(){
-        return $this->modifieddate;
+    public function getModifieddate(string $format = 'Y年m月d日 H:i'){
+        return $this->modifieddate ? (new DateTime($this->modifieddate))->format($format) : null;
     }
 
     // setter
     public function setTitle(string $title){
         $this->title = $title;
-    }
+}
 
     // 共通
     private function saveCategory(array $data){
-        $this->id = $data['id'];
-        $this->title = $data['title'];
-        $this->createdate = $data['createdate'];
+        $this->id           = $data['id'];
+        $this->title        = $data['title'];
+        $this->createdate   = $data['createdate'];
         $this->modifieddate = $data['modifieddate'];
     }
 
@@ -45,12 +45,23 @@ class dbCategory extends DB {
     }
 
     public function getCategoryList(){
-        $this->categoryList = $this->pdo
-                                ->query("select * from category order by id")
-                                ->fetAll();
+        $this->categoryList = $this->pdo->query("select * from category order by id");
     }
 
-    public function UpdateCategory(){
+    public function getCategoryListData(){
+        $res = $this->categoryList->fetch();
+        $res ? $this->saveCategory($res) : false;
+        return $res;
+    }
+
+    public function addCategory(array $data){
+        $stmt = $this->pdo->prepare("insert into
+                                     category('title','createdate')
+                                     values  (:title,datetime('now','localtime'))");
+        $stmt->execute(['title'=>$data['title']]);
+    }
+
+    public function updateCategory(){
         $stmt = $this->pdo->prepare("update category 
                                      set title=:title,
                                      modifieddate=datetime('now','localtime') 
@@ -63,7 +74,7 @@ class dbCategory extends DB {
 
     public function delCategory(int $id){
         $stmt = $this->pdo->prepare("delete from category where id=:id");
-        $stmt->execute(['id' => $id,]);
+        $stmt->execute(['id' => $id]);
     }
 
 }
