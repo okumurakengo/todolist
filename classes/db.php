@@ -41,7 +41,7 @@ class DB {
                 UNION ALL
                 SELECT 'Todos'                     title,
                        DATETIME('now','localtime') createdate
-                       UNION ALL
+                UNION ALL
                 SELECT 'Shopping'                  title,
                        DATETIME('now','localtime') createdate
              )
