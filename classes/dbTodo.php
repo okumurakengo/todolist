@@ -115,8 +115,10 @@ class dbTodo extends DB {
         $stmt->execute(['id' => $id]);
     }
 
-    public function cntTodo(){
-        return $this->pdo->query("select count(*) from todo")->fetch();
+    public function cntTodo(int $category_id){
+        $stmt = $this->pdo->prepare("select count(*) cnt from todo where category_id=:category_id");
+        $stmt->execute(['category_id'=>$category_id]);
+        return $stmt->fetch()['cnt'];
     }
 
 }

@@ -25,7 +25,7 @@
         <span>
             <select name="category_id">
             {% for key,row in categoryList %}
-                <option value="{{ row.id }}">{{ row.title }}</option>
+                <option value="{{ row.id }}" {% if todoData.category_id == row.id %}selected{% endif %}>{{ row.title }}</option>
             {% endfor %}
             </select>
         </span>

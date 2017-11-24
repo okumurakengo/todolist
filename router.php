@@ -7,5 +7,5 @@ if(preg_match('/\.css$/i',$_SERVER["REQUEST_URI"])) {
     header('Content-Type: text/javascript; charset=utf-8');
     require __DIR__.'/js/'.basename($_SERVER['PHP_SELF']);
 } else {
-    require __DIR__."/public/index.php";
+    require __DIR__."/index.php";
 }

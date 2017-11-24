@@ -52,13 +52,19 @@ $app->post('/category/del/{id}', function (Request $request, Response $response,
     $dbCategory = new dbCategory;
     $dbTodo = new dbTodo;
 
-    if($dbTodo->cntTodo()){
+    if($categoryCnt=($dbCategory->cntCategory()==='1')){
+        $massage = 'カテゴリーデータが1件の場合は削除できません。';
+    }
+    if($todoCnt=$dbTodo->cntTodo($args['id'])){
+        $massage = 'todoにデータがある場合は削除できません。';
+    }
+    if($categoryCnt||$todoCnt){
         return "<html><body>
-                    <script>alert('todoにデータがある場合は削除できません。');
+                    <script>alert('${massage}');
                             location.href='/category';</script>
                 </body></html>";
-    }else{
-        $dbCategory->delCategory($args['id']);
-        return $response->withStatus(302)->withHeader('Location', '/category');
     }
+
+    $dbCategory->delCategory($args['id']);
+    return $response->withStatus(302)->withHeader('Location', '/category');
 });

@@ -77,4 +77,8 @@ class dbCategory extends DB {
         $stmt->execute(['id' => $id]);
     }
 
+    public function cntCategory(){
+        return $this->pdo->query("select count(*) cnt from category")->fetch()['cnt'];
+    }
+
 }
