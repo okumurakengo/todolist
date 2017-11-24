@@ -4,6 +4,7 @@ class DB {
     protected $pdo;
 
     public function __construct() {
+        if(!is_dir(__DIR__.'/../db')) mkdir(__DIR__.'/../db');
         $pdo = new PDO('sqlite:'.__DIR__.'/../db/db.sqlite');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
